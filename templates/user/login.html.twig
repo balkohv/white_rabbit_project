@@ -1,0 +1,22 @@
+{% extends 'base.html.twig' %}
+{% block title %}login{% endblock %}
+{% block content %}
+<div class="col-12 justify-content-center"  style="display:flex;">
+    <div class=" col-3 log-container justify-content-center ">
+        {{ form_start(form) }}
+        <div class="row">
+            {{ form_label(form.username) }}
+            {{ form_widget(form.username) }}
+        </div>
+        <div class="row">
+            {{ form_label(form.password) }}
+            {{ form_widget(form.password) }}
+        </div>
+        <div class="row">
+            {{ form_widget(form.submit) }}
+            
+        </div>
+        {{ form_end(form) }}
+    </div>
+</div>
+{% endblock %}

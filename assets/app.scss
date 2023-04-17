@@ -1,0 +1,28 @@
+body{
+    margin: 0;
+}
+.nav-bar{
+    display: flex;
+    height: 60px;
+    background-color: #b04adb;
+}
+
+.nav-bar_logo{
+    margin:5px
+}
+
+.nav-bar_menu>ul{
+    display:inline-flex;
+    list-style-type: none;
+}
+
+.nav-bar_menu>ul>li>a{
+    text-decoration: none;
+    color: #FFF;
+    padding: 10px;font-size: larger;
+    font-weight: bolder;
+}
+.nav-bar_login{
+    margin: 5px;
+    justify-content: flex-end;
+}

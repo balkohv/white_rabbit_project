@@ -2,18 +2,61 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
-        {# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+        <link rel="icon" href="{{ asset('img/favicon.ico') }}">
         {% block stylesheets %}
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
-
-        {% block javascripts %}
-            {{ encore_entry_script_tags('app') }}
-        {% endblock %}
     </head>
-    <body>
-        {% block body %}{% endblock %}
+    <body style="background-image:url({{ asset('img/backgroundpic.png') }})">
+        {% block body %}
+        <div class="nav-bar">
+            <div class="nav-bar_logo">
+                <a href="{{path('dashboard_index')}}">
+                    <img src="{{ asset('img/white_rabbit.png') }}" alt="logo" height="50px">
+                </a>
+            </div>
+            {% if log is defined == false %}
+            <div class="nav-bar_menu">
+                <ul>
+                    <li><a class="nav-link" href="#">Map</a></li>
+                    <li><a class="nav-link" href="#">Liste Destinations</a></li>
+                    <li><a class="nav-link" href="#">a definir</a></li>
+                </ul>
+            </div>
+            <div class="nav-bar_login col-7 justify-content-end ">
+                <div class="dropdown show">
+                    <a class="btn dropdown-toggle dropdown-trigger" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        {#  {{user.username }}#}test
+                    </a>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                        <a class="dropdown-item" href="#">Deconnection</a>
+                        <a class="dropdown-item" href="#">Another action</a>
+                        <a class="dropdown-item" href="#">Something else here</a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div  class="col-11 justify-content-end " style="display:flex;">
+                <a class="dropdown-trigger justify-content-center" style="display:flex;" href="{{path('login')}}">
+                    login
+                </a>
+            </div>
+            {% endif %}
+        </div>
+        <div id="content">
+            {% block content %}{% endblock %}
+        </div>
+        {% endblock %}
     </body>
+    {% block javascript %}
+    <script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
+    {{ encore_entry_script_tags('app') }}
+    <script>
+            $(document).ready(function() {
+                $('#dropdownMenuLink').click(function() {
+                    $('.dropdown-menu').toggle();
+                });
+            });
+    </script>
+    {% endblock %}
 </html>

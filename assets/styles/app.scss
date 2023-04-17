@@ -1,0 +1,67 @@
+@import "~bootstrap/scss/bootstrap";
+:root{
+    --color-navbar: #c3a2d1;
+    --color-navbar-hover: #d07ef3;
+
+}
+body{
+    margin: 0;
+}
+.nav-bar{
+    display: flex;
+    height: 60px;
+    background-color: #6f2f8b;
+}
+
+.nav-bar_logo{
+    margin:5px
+}
+
+.nav-bar_menu>ul{
+    display:inline-flex;
+    list-style-type: none;
+}
+
+.nav-bar_menu>ul>li>a{
+    text-decoration: none;
+    color: var(--color-navbar);
+    padding: 10px;font-size: larger;
+    font-weight: bolder;
+    height: 60px;
+}
+.nav-bar_menu>ul>li>a:hover{
+    background-color: #8e3db0;
+    color: var(--color-navbar-hover);
+}
+.nav-bar_login{
+    margin: 5px;
+    display: flex;
+}
+
+.dropdown-trigger{
+    min-width: 177.98px;
+    color:var(--color-navbar);
+    text-decoration: none;
+    padding: 10px;font-size: larger;
+    font-weight: bolder;
+}
+.dropdown-trigger:hover{
+    background-color: #8e3db0;
+    color: var(--color-navbar-hover);
+}
+.log-container{
+    background-color: #9a4abd;
+    border-radius: 10px;
+    color: #e0cae9;
+    margin-top:25vh;
+    height: 45vh;
+    padding:3vw;
+}
+
+.form_input{
+    margin-bottom: 10px;
+}
+
+.form_submit{
+    margin-top:20px;
+}
