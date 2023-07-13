@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": "8.2.4",
         "ext-ctype": "*",
         "ext-iconv": "*",
         "doctrine/annotations": "^2.0",
@@ -45,6 +45,10 @@
         "twig/twig": "^2.12|^3.0"
     },
     "config": {
+        "preferred-install": "dist",
+        "platform": {
+            "php": "5.3.9"
+        },
         "allow-plugins": {
             "composer/package-versions-deprecated": true,
             "php-http/discovery": true,
@@ -52,9 +56,6 @@
             "symfony/runtime": true
         },
         "optimize-autoloader": true,
-        "preferred-install": {
-            "*": "dist"
-        },
         "sort-packages": true
     },
     "autoload": {
