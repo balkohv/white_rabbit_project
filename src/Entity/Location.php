@@ -21,6 +21,26 @@ class Location
      * @ORM\Column(type="string", length=30)
      */
     private $name;
+    
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $ville;
+    
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $adresse;
+
+    /**
+     * @ORM\Column(type="string", length=30)
+     */
+    private $code_postal;
+    
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $french;
 
     /**
      * @ORM\Column(type="float")
@@ -33,14 +53,15 @@ class Location
     private $lat;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\User", inversedBy="locations")
+     * @ORM\JoinColumn(nullable=false)
      */
     private $id_user;
 
     /**
      * @ORM\Column(type="integer")
      */
-    private $weight;
+    private $dist;
 
     public function getId(): ?int
     {
@@ -95,14 +116,14 @@ class Location
         return $this;
     }
 
-    public function getWeight(): ?int
+    public function getDist(): ?int
     {
-        return $this->weight;
+        return $this->dist;
     }
 
-    public function setWeight(int $weight): self
+    public function setDist(int $dist): self
     {
-        $this->weight = $weight;
+        $this->dist = $dist;
 
         return $this;
     }

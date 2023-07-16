@@ -4,11 +4,22 @@
         <meta charset="UTF-8">
         <link rel="icon" href="{{ asset('img/favicon.ico') }}">
         {% block stylesheets %}
+            <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
             {{ encore_entry_link_tags('app') }}
         {% endblock %}
     </head>
     <body style="background-image:url({{ asset('img/backgroundpic.png') }})">
         {% block body %}
+        <!-- Bouton pour ouvrir la modal -->
+
+        <!-- Modal -->
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h2>Ma Modal</h2>
+                <p>Contenu de la modal...</p>
+            </div>
+        </div>
         <div class="nav-bar">
             <div class="nav-bar_logo">
                 <a href="{{path('dashboard_index')}}">

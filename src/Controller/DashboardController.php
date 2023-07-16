@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Form\LocationType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
@@ -20,12 +21,13 @@ class DashboardController extends AbstractController
 {
     /**
      * @Route("/dashboard/index", name="dashboard_index")
-     * @Method({"POST","GET"})
      */
     public function dashboard_index(Request $request , AuthorizationCheckerInterface $authChecker,SessionInterface $session)
     {
+        $form = $this->createForm(LocationType::class);
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',
+            'form_location' => $form->createView(),
         ]);
     }
 }

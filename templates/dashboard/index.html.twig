@@ -3,5 +3,72 @@
 {% block title %}{% endblock %}
 
 {% block content %}
-    
+<div id="myModal_new" class="modal">
+    <div class="modal-content">
+        <span class="close" id="close_new">&times;</span>
+        <h2>Ma Modal</h2>
+        {% include '/location/new.html.twig' with {'form':form_location} %}
+    </div>
+</div>
+<button data-toggle="modal_new" data-target="#myModal_new" class="btn btn-primary col-2" style="float: right;margin-right: 4vw;margin-top: 4vh">nouvelle destination</button>
+<div class="col-12 d-flex justify-content-center map-cont">
+    <div  class="col-11 d-flex justify-content-center" id="map" style="height:80vh;margin-top:1vh">
+    </div>
+</div>
+{% endblock %}
+{% block javascript %}
+<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    {{ encore_entry_script_tags('app') }}
+<script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
+<script src="http://www.openlayers.org/api/OpenLayers.js"></script>
+<script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+<script>
+
+
+// Créez une instance de carte et spécifiez les coordonnées du centre et le niveau de zoom
+const map = L.map('map').setView([43.599134, 1.445085], 13);
+
+// Ajoutez une couche de tuiles OpenStreetMap à la carte
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
+
+$(document).ready(function() {
+  // Fermer la modal lorsque l'utilisateur clique sur le bouton de fermeture
+  $('.close').click(function() {
+    $('#myModal').hide();
+  });
+
+  // Fermer la modal lorsque l'utilisateur clique en dehors de la modal
+  $(window).click(function(event) {
+    if (event.target == $('#myModal')[0]) {
+      $('#myModal').hide();
+    }
+  });
+
+  // Ouvrir la modal lorsque l'utilisateur clique sur le bouton d'ouverture
+  $('button[data-toggle="modal"]').click(function() {
+    $('#myModal').show();
+  });
+
+
+  $('#close_new').click(function() {
+    $('#myModal_new').hide();
+  });
+
+  // Fermer la modal lorsque l'utilisateur clique en dehors de la modal
+  $(window).click(function(event) {
+    if (event.target == $('#myModal_new')[0]) {
+      $('#myModal_new').hide();
+    }
+  });
+
+  // Ouvrir la modal lorsque l'utilisateur clique sur le bouton d'ouverture
+  $('button[data-toggle="modal_new"]').click(function() {
+    $('#myModal_new').show();
+  });
+});
+
+</script>
 {% endblock %}

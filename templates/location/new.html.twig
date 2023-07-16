@@ -1,0 +1,23 @@
+
+{% block body %}
+<div class="col-12 d-flex justify-content-center">
+    <div class="row col-4">
+        {{ form_label(form.name) }}
+		{{ form_widget(form.name) }}
+        {{ form_label(form.ville) }}
+		{{ form_widget(form.ville) }}
+    </div>
+    <div class="row col-4">
+        {{ form_label(form.adresse) }}
+		{{ form_widget(form.adresse) }}
+        {{ form_label(form.code_postal) }}
+		{{ form_widget(form.code_postal) }}
+    </div>
+    <div class="row col-4">
+        {{ form_label(form.lon) }}
+		{{ form_widget(form.lon) }}
+        {{ form_label(form.lat) }}
+		{{ form_widget(form.lat) }}
+    </div>
+</div>
+{% endblock %}
