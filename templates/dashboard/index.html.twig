@@ -4,9 +4,9 @@
 
 {% block content %}
 <div id="myModal_new" class="modal">
-    <div class="modal-content">
+    <div class="modal-content" id="modal-content-new">
         <span class="close" id="close_new">&times;</span>
-        <h2>Ma Modal</h2>
+        <h2>Nouvelle destination</h2>
         {% include '/location/new.html.twig' with {'form':form_location} %}
     </div>
 </div>
@@ -22,12 +22,9 @@
 <script src="https://npmcdn.com/leaflet@1.0.0-rc.2/dist/leaflet.js"></script>
 <script src="http://www.openlayers.org/api/OpenLayers.js"></script>
 <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
-
 <script>
-
-
 // Créez une instance de carte et spécifiez les coordonnées du centre et le niveau de zoom
-const map = L.map('map').setView([43.599134, 1.445085], 13);
+const map = L.map('map').setView([43.599134, 1.445085], 11);
 
 // Ajoutez une couche de tuiles OpenStreetMap à la carte
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -35,6 +32,10 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 $(document).ready(function() {
+  var lat=[];
+  var lon=[];
+  var markers=[];
+  window.onload=pin_locs();
   // Fermer la modal lorsque l'utilisateur clique sur le bouton de fermeture
   $('.close').click(function() {
     $('#myModal').hide();
@@ -48,7 +49,18 @@ $(document).ready(function() {
   });
 
   // Ouvrir la modal lorsque l'utilisateur clique sur le bouton d'ouverture
-  $('button[data-toggle="modal"]').click(function() {
+  $(document).on('click','button[data-toggle="modal"]',function() {
+    $.ajax({
+      url:"{{(path('view_loc'))}}",
+      type:'POST',
+      data:{
+        'locId': this.id,
+      },
+      async:true,
+      success:function(rsp){
+        $('#modal-content-view').html(rsp);
+      }
+    })
     $('#myModal').show();
   });
 
@@ -68,6 +80,58 @@ $(document).ready(function() {
   $('button[data-toggle="modal_new"]').click(function() {
     $('#myModal_new').show();
   });
+
+  $(".france").on('click',function(){
+    if($(".lat").hasClass('d-none')){
+      $(".lat").removeClass('d-none');
+    }else{
+      $(".lat").addClass('d-none');
+    }
+  })
+
+  $(document).on('click','.accept',function(){
+    $.ajax({
+      url:"{{ (path('accept_loc'))}}",
+      type:"POST",
+      data:{
+        locId:this.id,
+      },
+      async:true,
+      success: function(rsp){
+        location.reload();
+      }
+    })
+  })
+
+  function pin_locs(){
+			$.ajax({
+					url:"{{ (path('all_locations')) }}",
+					type: "POST",
+					data:{
+					},
+					async: true,
+					success: function (rsp)
+					{
+						for(var loc in rsp.data){
+							/*var pinIcon = L.icon({
+								iconUrl: "{{ asset('images/pin2.png')}}",
+								iconSize: [30, 35],
+								popupAnchor: [0, -18]
+							});*/
+							id=rsp.data[loc].locId;
+							lat[id]=rsp.data[loc].lat;
+							lon[id]=rsp.data[loc].lon;
+              console.log(lon);
+							markers[id] = new L.Marker(new L.LatLng(lat[id],lon[id])/*,{icon: pinIcon}*/).addTo(map);
+							//itineraire[id] = rsp.data[transport].route;
+							markers[id].id = id;
+							markers[id].bindPopup('<button id="'+ id +'" data-toggle="modal" data-target="#myModal" class="btn btn-primary col-12" >voir Voyage</button>');
+						}
+					}
+				})
+			}
+
+
 });
 
 </script>

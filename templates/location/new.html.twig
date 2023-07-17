@@ -1,23 +1,39 @@
 
 {% block body %}
-<div class="col-12 d-flex justify-content-center">
-    <div class="row col-4">
-        {{ form_label(form.name) }}
-		{{ form_widget(form.name) }}
-        {{ form_label(form.ville) }}
-		{{ form_widget(form.ville) }}
+{{ form_start(form) }}
+    <div class="row col-12 d-flex justify-content-center p-3">
+        <div class="col-4">
+            {{ form_label(form.name) }}
+            {{ form_widget(form.name) }}
+            {{ form_label(form.ville) }}
+            {{ form_widget(form.ville) }}
+            {{ form_label(form.note) }}
+            {{ form_widget(form.note) }}
+            <div class="lat d-none">
+                {{ form_label(form.lat) }}
+                {{ form_widget(form.lat) }}
+            </div>
+        </div>
+        <div class="col-4">
+            {{ form_label(form.adresse) }}
+            {{ form_widget(form.adresse) }}
+            {{ form_label(form.codePostal) }}
+            {{ form_widget(form.codePostal) }}
+            {{ form_label(form.estimation) }}
+            {{ form_widget(form.estimation) }}
+            <div class="lat d-none">
+                {{ form_label(form.lon) }}
+                {{ form_widget(form.lon) }}
+                {{ form_label(form.pays) }}
+                {{ form_widget(form.pays) }}
+            </div>
+            {{ form_label(form.french) }}
+            {{ form_widget(form.french) }}
+        </div>
     </div>
-    <div class="row col-4">
-        {{ form_label(form.adresse) }}
-		{{ form_widget(form.adresse) }}
-        {{ form_label(form.code_postal) }}
-		{{ form_widget(form.code_postal) }}
+    <div class="col-12 d-flex justify-content-center">  
+        <button type="submit" class=" col-3 btn btn-info" style="color:#FFF;">valider</button>
     </div>
-    <div class="row col-4">
-        {{ form_label(form.lon) }}
-		{{ form_widget(form.lon) }}
-        {{ form_label(form.lat) }}
-		{{ form_widget(form.lat) }}
-    </div>
-</div>
+    <input name="loc" hidden></input>
+{{ form_end(form) }}
 {% endblock %}

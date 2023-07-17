@@ -24,6 +24,9 @@ class DashboardController extends AbstractController
      */
     public function dashboard_index(Request $request , AuthorizationCheckerInterface $authChecker,SessionInterface $session)
     {
+        if(null !==($request->request->get("loc"))){
+            $response = $this->forward('App\Controller\LocationController::new_location', array('request' => $request,));return $response;
+        }
         $form = $this->createForm(LocationType::class);
         return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashboardController',

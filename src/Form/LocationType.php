@@ -37,29 +37,45 @@ class LocationType extends AbstractType
                 'attr' => ['class' => 'form-control form_input'],
                 )
                 )
-            ->add('code_postal', TextType::class,array(
+            ->add('codePostal', TextType::class,array(
                 'label' => 'code postal',
                 'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
                 )
                 )
-            ->add('french', TextType::class,array(
-                'label' => 'france',
+            ->add('estimation', NumberType::class,array(
+                'label' => 'Estimation',
                 'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
+                )
+                )
+            ->add('note', TextType::class,array(
+                'label' => 'Note',
+                'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
+                )
+                )
+            ->add('pays', TextType::class,array(
+                'label' => 'Pays',
+                'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
+                )
+                )
+            ->add('french', CheckboxType::class,array(
+                'label' => 'france',
+                'attr' => ['class' => 'france form_input', 'checked' => 'checked'],
                 )
                 )
             ->add('lon', TextType::class,array(
-                'label' => 'lon',
+                'label' => 'longitude',
                 'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
                 )
                 )
             ->add('lat', TextType::class,array(
-                'label' => 'lat',
+                'label' => 'latitude',
                 'attr' => ['class' => 'form-control form_input'],
-                )
-                )
-            ->add('dist', TextType::class,array(
-                'label' => 'distance',
-                'attr' => ['class' => 'form-control form_input'],
+                'required' => false,
                 )
                 )
         ;

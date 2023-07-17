@@ -1,0 +1,24 @@
+
+{% block body %}
+<div class="col-12 d-flex justify-content-center">
+    <div class="col-5 card">
+        <div class="card-body">
+            <h3>Note :</h3></br>
+            <p> {{location.note}}</p>
+        </div>
+    </div>
+    <div class="col-5">
+        <ul class="list-info-loc">
+            <li>Nom : {{location.ville}}</li>
+            <li>Pays : {{location.pays}}</li>
+            <li>Ville : {{location.ville}}</li>
+            <li>Adresse : {{location.adresse}}</li>
+            <li>Code postal : {{location.codePostal}}</li>
+            <li>Esimation : {{location.estimation}}</li>
+        </ul>
+    </div>
+</div>
+<div class="col-12 d-flex justify-content-center mt-3">
+    <button class="col-4 btn btn-info accept" id="{{location.id}}" style="color:#fff;">Valider</button>
+</div>
+{% endblock %}
