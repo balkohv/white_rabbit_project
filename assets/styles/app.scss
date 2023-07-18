@@ -76,6 +76,7 @@ body{
 .modal {
     display: none;
     position: fixed;
+    align-items: center;
     z-index: 2;
     left: 0;
     top: 0;
@@ -88,9 +89,17 @@ body{
   .modal-content {
     background-color: #fefefe;
     margin: 15% auto;
+    margin-top:0;
+    margin-bottom: 0;
     padding: 20px;
+    max-height: 90vh;
     border: 1px solid #888;
     width: 80%;
+  }
+
+  #modal-content-picture{
+    display: flex;
+    max-height: 82vh;
   }
   
   .close {
@@ -111,3 +120,33 @@ body{
     list-style: none;
     text-decoration: none;
   }
+#map{
+    border-radius: 10px;
+}
+h3{
+    color:#838383;
+}
+
+p{
+    color:#838383;
+}
+
+h2{
+    color:#4b4b4b;
+}
+
+li{
+    color:#838383;
+}
+
+h5{
+    color:#636363;
+}
+
+input{
+    color:#636363;
+}
+
+label{
+    color:#636363;
+}

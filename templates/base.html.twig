@@ -15,26 +15,36 @@
         <!-- Modal -->
         <div id="myModal" class="modal">
             <div class="modal-content"  style="width:50vw !important">
-                <span class="close">&times;</span>
+                <span id="close" class="close">&times;</span>
                 <div id="modal-content-view">
                 </div>
             </div>
         </div>
+        
+        <div id="myModal_picture" class="modal">
+            <div class="modal-content"  style="width:50vw !important">
+                <span id="close_picture" class="close">&times;</span>
+                <div id="modal-content-picture">
+                </div>
+            </div>
+        </div>
+        <!-- fin modal -->
+
         <div class="nav-bar">
-            <div class="nav-bar_logo">
+            <div class="nav-bar_logo col-2">
                 <a href="{{path('dashboard_index')}}">
                     <img src="{{ asset('img/white_rabbit.png') }}" alt="logo" height="50px">
                 </a>
             </div>
             {% if log is defined == false %}
-            <div class="nav-bar_menu">
+            <div class="nav-bar_menu col-8 d-flex justify-content-center">
                 <ul>
-                    <li><a class="nav-link" href="#">Map</a></li>
-                    <li><a class="nav-link" href="#">Liste Destinations</a></li>
-                    <li><a class="nav-link" href="#">a definir</a></li>
+                    <li><a class="nav-link" href="{{(path('dashboard_index'))}}">Map</a></li>
+                    <li><a class="nav-link" href="{{(path('not_finished'))}}">feature 1</a></li>
+                    <li><a class="nav-link" href="{{(path('not_finished'))}}">feature 2</a></li>
                 </ul>
             </div>
-            <div class="nav-bar_login col-7 justify-content-end ">
+            <div class="nav-bar_login col-1 justify-content-start ">
                 <div class="dropdown show">
                     <a class="btn dropdown-toggle dropdown-trigger" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                         {#  {{user.username }}#}test

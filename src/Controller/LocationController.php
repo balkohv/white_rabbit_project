@@ -54,6 +54,7 @@ class LocationController extends AbstractController
             $locactionsTab['locId']=$loc->getId();
             $locactionsTab['lon']=$loc->getLon();
             $locactionsTab['lat']=$loc->getLat();
+            $locactionsTab['made']=$loc->getmade();
             array_push($locs,$locactionsTab);
         }
         $data=['data'=>$locs];
@@ -102,6 +103,7 @@ class LocationController extends AbstractController
         $data=['data'=>'success'];
         return new JsonResponse($data);
     }
+
      /**
      * @Route("/location/{locId}/upload_pic", name="upload_pic")
      */
@@ -129,5 +131,19 @@ class LocationController extends AbstractController
         }
         
         return $this->redirectToRoute('dashboard_index');
+    }
+
+    
+     /**
+     * @Route("/location/get_picture", name="get_picture")
+     */
+    public function get_picture(Request $request): Response
+    {
+        $pictureRep = $this->getDoctrine()->getRepository(Picture::class);
+        $pic=$pictureRep->findOneBy(array('id'=>$request->request->get('idPic')));
+    
+        return $this->render('location/picture_view.html.twig', [
+            'picture'=>$pic
+        ]); 
     }
 }

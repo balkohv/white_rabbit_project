@@ -37,14 +37,16 @@ $(document).ready(function() {
   var markers=[];
   window.onload=pin_locs();
   // Fermer la modal lorsque l'utilisateur clique sur le bouton de fermeture
-  $('.close').click(function() {
+  $('#close').click(function() {
     $('#myModal').hide();
+    $("#myModal").removeClass('d-flex');
   });
 
   // Fermer la modal lorsque l'utilisateur clique en dehors de la modal
   $(window).click(function(event) {
     if (event.target == $('#myModal')[0]) {
       $('#myModal').hide();
+      $("#myModal").removeClass('d-flex');
     }
   });
 
@@ -61,24 +63,28 @@ $(document).ready(function() {
         $('#modal-content-view').html(rsp);
       }
     })
+    $('#myModal').addClass('d-flex');
     $('#myModal').show();
   });
 
 
   $('#close_new').click(function() {
     $('#myModal_new').hide();
+    $("#myModal_new").removeClass('d-flex');
   });
 
   // Fermer la modal lorsque l'utilisateur clique en dehors de la modal
   $(window).click(function(event) {
     if (event.target == $('#myModal_new')[0]) {
       $('#myModal_new').hide();
+      $("#myModal_new").removeClass('d-flex');
     }
   });
 
   // Ouvrir la modal lorsque l'utilisateur clique sur le bouton d'ouverture
   $('button[data-toggle="modal_new"]').click(function() {
     $('#myModal_new').show();
+    $('#myModal_new').addClass('d-flex');
   });
 
   $(".france").on('click',function(){
@@ -113,16 +119,21 @@ $(document).ready(function() {
 					success: function (rsp)
 					{
 						for(var loc in rsp.data){
-							/*var pinIcon = L.icon({
-								iconUrl: "{{ asset('images/pin2.png')}}",
+              if(rsp.data[loc].made){
+                var path="{{ asset('img/pin.png')}}";
+              }else{
+                var path="{{ asset('img/pin-non-valider.png')}}"
+              }
+							var pinIcon = L.icon({
+								iconUrl: path,
 								iconSize: [30, 35],
 								popupAnchor: [0, -18]
-							});*/
+							});
 							id=rsp.data[loc].locId;
 							lat[id]=rsp.data[loc].lat;
 							lon[id]=rsp.data[loc].lon;
               console.log(lon);
-							markers[id] = new L.Marker(new L.LatLng(lat[id],lon[id])/*,{icon: pinIcon}*/).addTo(map);
+							markers[id] = new L.Marker(new L.LatLng(lat[id],lon[id]),{icon: pinIcon}).addTo(map);
 							//itineraire[id] = rsp.data[transport].route;
 							markers[id].id = id;
 							markers[id].bindPopup('<button id="'+ id +'" data-toggle="modal" data-target="#myModal" class="btn btn-primary col-12" >voir Voyage</button>');

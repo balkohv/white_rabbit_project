@@ -33,4 +33,20 @@ class DashboardController extends AbstractController
             'form_location' => $form->createView(),
         ]);
     }
+    
+    /**
+     * @Route("/error/500", name="not_finished")
+     */
+    public function not_finished(Request $request , AuthorizationCheckerInterface $authChecker,SessionInterface $session)
+    {
+        if(rand(0,1)){
+            $path="img/lapin_truel.jpg";
+        }else{
+            
+            $path="img/lapin_panneau.jpg";
+        }
+        return $this->render('error/not_finished.html.twig',[
+            'path'=>$path,
+        ]);
+    }
 }

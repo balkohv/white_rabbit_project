@@ -3,21 +3,16 @@
 <div class="col-12 d-flex justify-content-center">
     <div class="col-6 ">
         <div class="card">
-            <div class="card-body">
+            <div class="card-body" style="max-height: 30vh;overflow: auto;">
                 {% for pic in pictures %}
-                    <img src="{{ asset(pic.path) }}" alt="logo" height="100px">
+                    <img id="{{pic.id}}" class="picture" src="{{ asset(pic.path) }}" alt="logo" height="100px" style="border-radius:10px;cursor:pointer;">
                 {% endfor %}
             </div>
         </div>
-        <form action="{{(path('upload_pic',{'locId':location.id}))}}" method="post" enctype="multipart/form-data">
-            <label for="image_uploads" class="btn btn-info mt-4" style="color:#FFF;">Ajouter des photos</label>
-            <input name="image_uploads[]" id="image_uploads" class="col-1" type="file" accept=".png,.jpg" placeholder="Ajouter des photos" style="opacity:0;" multiple ></input>
-            <button id="send" class="d-none btn btn-success mt-4">Envoyer les photos</button>
-        </form>
     </div>
     <div class="col-3">
         <ul class="list-info-loc">
-            <li>Nom : {{location.ville}}</li>
+            <li>Nom : {{location.name}}</li>
             <li>Pays : {{location.pays}}</li>
             <li>Ville : {{location.ville}}</li>
             <li>Adresse : {{location.adresse}}</li>
@@ -33,6 +28,11 @@
     </div>
 </div>
 <div class="col-12 d-flex justify-content-center mt-3">
+    <form action="{{(path('upload_pic',{'locId':location.id}))}}" method="post" enctype="multipart/form-data">
+        <label for="image_uploads" class="btn btn-info" style="color:#FFF;">Ajouter des photos</label>
+        <input name="image_uploads[]" id="image_uploads" class="col-1" type="file" accept=".png,.jpg" placeholder="Ajouter des photos" style="opacity:0;" multiple ></input>
+        <button id="send" class="d-none btn btn-success">Envoyer les photos</button>
+    </form>
     <button class="col-4 btn btn-danger accept" id="{{location.id}}" style="color:#fff;">Annuler</button>
 </div>
 {% endblock %}
@@ -41,10 +41,38 @@
 <script>
 
 $(document).ready(function() {
-    $('#image_uploads').addEventListener('change', afficher_btn());
-    function afficher_btn(){
+    $('#image_uploads').on('click',function (){
         $('#send').removeClass('d-none');
-    }
+    })
+
+    //--------------modal--------------------//
+    $('#close_picture').click(function() {
+        $('#myModal_picture').hide();
+        $('#myModal_picture').removeClass('d-flex');
+    });
+
+    $(window).click(function(event) {
+        if (event.target == $('#myModal_picture')[0]) {
+            $('#myModal_picture').hide();
+            $('#myModal_picture').removeClass('d-flex');
+        }
+    });
+
+    $('.picture').on('click',function(){
+        $.ajax({
+            url:"{{(path('get_picture'))}}",
+            type:"POST",
+            data:{
+                'idPic': this.id,
+            },
+            async:true,
+            success:function(rsp){
+                $('#modal-content-picture').html(rsp);
+                $('#myModal_picture').show();
+                $('#myModal_picture').addClass('d-flex');
+            }
+        })
+    });
 });
 
 </script>
